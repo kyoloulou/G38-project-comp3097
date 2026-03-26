@@ -1,17 +1,15 @@
-//
-//  FitQuestT14App.swift
-//  FitQuestT14
-//
-//  Created by user291485 on 3/25/26.
-//
-
 import SwiftUI
 
 @main
 struct FitQuestT14App: App {
+    @StateObject private var store = WorkoutStore()
+    @StateObject private var auth  = AuthStore()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environmentObject(store)
+                .environmentObject(auth)
         }
     }
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		5B2A0A222F74AB370052A1E9 /* FitQuestT14.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitQuestT14.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B2A0A222F74AB370052A1E9 /* FitQuestT14.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = FitQuestT14.app; path = "/Volumes/Macintosh_HD/Users/user291485/Documents/FitQuestT14/build/Debug-iphoneos/FitQuestT14.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,16 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				5B2A0A242F74AB370052A1E9 /* FitQuestT14 */,
-				5B2A0A232F74AB370052A1E9 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		5B2A0A232F74AB370052A1E9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5B2A0A222F74AB370052A1E9 /* FitQuestT14.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,7 +86,7 @@
 			mainGroup = 5B2A0A192F74AB370052A1E9;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 5B2A0A232F74AB370052A1E9 /* Products */;
+			productRefGroup = 5B2A0A192F74AB370052A1E9;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
