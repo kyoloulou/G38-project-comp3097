@@ -8,7 +8,7 @@ struct WorkoutRow: View {
         case "Running":  return "figure.run"
         case "Cycling":  return "figure.outdoor.cycle"
         case "Push-ups": return "figure.strengthtraining.traditional"
-        case "Squats":   return "figure.squat"
+        case "Squats":   return "figure.strengthtraining.functional"
         default:         return workout.type == .cardio ? "heart.fill" : "dumbbell.fill"
         }
     }

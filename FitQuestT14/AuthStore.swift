@@ -4,13 +4,15 @@ import Combine
 class AuthStore: ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var currentEmail: String = ""
+    @Published var store: WorkoutStore = WorkoutStore(userEmail: "")
 
     private let loggedInKey = "auth_logged_in_email"
 
     init() {
         if let email = UserDefaults.standard.string(forKey: loggedInKey), !email.isEmpty {
-            isLoggedIn = true
             currentEmail = email
+            store = WorkoutStore(userEmail: email)
+            isLoggedIn = true
         }
     }
 
@@ -23,6 +25,8 @@ class AuthStore: ObservableObject {
         KeychainHelper.save(password.sha256, forKey: e)
         UserDefaults.standard.set(e, forKey: loggedInKey)
         currentEmail = e
+        store = WorkoutStore(userEmail: e)
+        isLoggedIn = true
         return nil
     }
 
@@ -32,12 +36,15 @@ class AuthStore: ObservableObject {
         guard stored == password.sha256 else { return "Incorrect password." }
         UserDefaults.standard.set(e, forKey: loggedInKey)
         currentEmail = e
+        store = WorkoutStore(userEmail: e)
+        isLoggedIn = true
         return nil
     }
 
     func signOut() {
         UserDefaults.standard.removeObject(forKey: loggedInKey)
         currentEmail = ""
+        store = WorkoutStore(userEmail: "")
         isLoggedIn = false
     }
 

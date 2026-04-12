@@ -5,9 +5,9 @@ struct WorkoutDetailView: View {
 
     @EnvironmentObject var store: WorkoutStore
 
-    @State private var isRunning     = false
+    @State private var isRunning      = false
     @State private var calories: Double = 0
-    @State private var showResult    = false
+    @State private var showResult     = false
 
     @State private var inputMinutes: String = ""
     @State private var speed:        String = ""
@@ -17,6 +17,12 @@ struct WorkoutDetailView: View {
     @State private var sets: String = ""
 
     @State private var timerHolder = TimerHolder()
+
+    // Load weight from profile (default 70kg if not set)
+    private var weightKg: Double {
+        let stored = UserDefaults.standard.string(forKey: "profile_weight") ?? ""
+        return Double(stored) ?? 70.0
+    }
 
     private var minutesValue: Double? { Double(inputMinutes).flatMap { $0 > 0 ? $0 : nil } }
     private var speedValue:   Double? { Double(speed).flatMap   { $0 > 0 ? $0 : nil } }
@@ -140,7 +146,7 @@ struct WorkoutDetailView: View {
                 guard isRunning else { return }
                 if timeRemaining > 0 {
                     timeRemaining -= 1
-                    calories += CalorieCalculator.cardioPerSecond(speed: spd)
+                    calories += CalorieCalculator.cardioPerSecond(speed: spd, weightKg: weightKg)
                 } else {
                     stopWorkout()
                 }
@@ -155,10 +161,20 @@ struct WorkoutDetailView: View {
     }
 
     func calculateCalories() {
+        let met = CalorieCalculator.met(for: workout.name)
         if workout.type == .cardio {
-            calories = CalorieCalculator.cardio(minutes: minutesValue ?? 0, speed: speedValue ?? 0)
+            calories = CalorieCalculator.cardio(
+                minutes: minutesValue ?? 0,
+                met: met,
+                weightKg: weightKg
+            )
         } else {
-            calories = CalorieCalculator.strength(reps: repsValue ?? 0, sets: setsValue ?? 0)
+            calories = CalorieCalculator.strength(
+                reps: repsValue ?? 0,
+                sets: setsValue ?? 0,
+                met: met,
+                weightKg: weightKg
+            )
         }
         showResult = true
     }

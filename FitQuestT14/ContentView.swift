@@ -62,7 +62,7 @@ struct ContentView: View {
                                 }
                                 .frame(height: 180)
                                 .chartXAxis {
-                                    AxisMarks(values: .stride(by: .day)) { _ in
+                                    AxisMarks(values: .automatic(desiredCount: 5)) { _ in
                                         AxisGridLine()
                                         AxisValueLabel(format: .dateTime.month(.abbreviated).day())
                                     }

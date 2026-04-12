@@ -4,9 +4,12 @@ import Combine
 class WorkoutStore: ObservableObject {
     @Published var sessions: [WorkoutSession] = []
 
-    private let key = "workouts"
+    private let key: String
 
-    init() { load() }
+    init(userEmail: String) {
+        self.key = "workouts_\(userEmail)"
+        load()
+    }
 
     func save(session: WorkoutSession) {
         sessions.append(session)
